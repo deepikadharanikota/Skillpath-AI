@@ -1,3 +1,4 @@
+Demo Link:  http://localhost:8501
 ## SkillPath AI 🎓🤖
 
 **SkillPath AI** is an AI-powered personalized learning and skill recommendation system designed to create adaptive learning paths based on a learner's performance, knowledge level, and progress.
