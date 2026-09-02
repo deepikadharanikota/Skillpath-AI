@@ -38,8 +38,7 @@ Then open the URL Streamlit prints (usually `http://localhost:8501`).
 **Videos — one at a time, in order.** Each module (Introduction / Core
 Content / Final Review) has its own video list, watched strictly in
 sequence: `intro` has 1 video, `core` has **at least 2 detailed videos**
-(the "excluding introduction and conclusion" requirement), `summary` has
-1 recap video. The next video only unlocks once the current one is
+(the "excluding introduction and conclusion" requirement). The next video only unlocks once the current one is
 marked "✅ I've watched this." The quiz button itself stays locked until
 every video in the module is done.
 
@@ -47,7 +46,7 @@ every video in the module is done.
 **15 leveled questions — exactly 5 easy, 5 medium, 5 hard** — used for
 that topic's intro/core/summary quizzes (shuffled fresh each attempt).
 Questions are shown **one at a time**: you must select an answer and
-wait a **minimum of 60 seconds** before "Confirm Answer & Continue"
+wait a **minimum of 40 seconds** before "Confirm Answer & Continue"
 unlocks, there's no back button and no way to jump ahead, and the top
 navigation is hidden for the duration so you can't leave mid-quiz.
 After the 15th question, you get a full review (your answer, the
