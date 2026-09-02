@@ -1,158 +1,267 @@
-# SkillPath AI — 100% Python
+## SkillPath AI 🎓🤖
 
-An adaptive learning coach that uses a real, from-scratch Deep Q-Network
-(implemented in NumPy) to decide what a learner should study next and at
-what difficulty. **The entire project is now Python** — the old React /
-JavaScript frontend (`my-app/`) has been removed and replaced with a
-[Streamlit](https://streamlit.io) app that runs the same core RL logic
-directly, in-process.
+**SkillPath AI** is an AI-powered personalized learning and skill recommendation system designed to create adaptive learning paths based on a learner's performance, knowledge level, and progress.
 
+The project combines **Reinforcement Learning, recommendation techniques, quiz generation, learner simulation, and performance evaluation** to dynamically recommend suitable learning content.
 
-## Run it
+---
+
+## 🚀 Features
+
+* 🧠 **Personalized Learning Paths**
+  Dynamically recommends learning activities based on the learner's current knowledge and performance.
+
+* 🤖 **Deep Q-Network (DQN)**
+  Uses reinforcement learning to learn effective learning-path recommendations.
+
+* 👨‍🎓 **Simulated Learner**
+  Simulates learner behavior, progress, and responses to evaluate the recommendation system.
+
+* 📝 **AI Quiz Generation**
+  Generates quiz questions based on learning content and topics.
+
+* 📊 **Performance Metrics**
+  Tracks and evaluates learner performance and recommendation effectiveness.
+
+* 🔄 **Adaptive Recommendations**
+  Adjusts recommended learning activities according to learner state and previous outcomes.
+
+* 🧪 **Offline Training & Evaluation**
+  Supports training the reinforcement learning agent and evaluating its performance before deployment.
+
+---
+
+## 🏗️ Project Structure
+
+```text
+Skill-path-AI/
+│
+├── agent_utils.py              # Utility functions for the RL agent
+├── data.py                     # Dataset and learning data handling
+├── dqn_agent.py                # Deep Q-Network implementation
+├── dqn_weights.pkl             # Trained DQN model weights
+├── environment.py              # Learning environment for reinforcement learning
+├── evaluate.py                 # Model evaluation
+├── generate_quiz_bank.py       # Quiz/question bank generation
+├── main.py                     # Main application entry point
+├── recommender.py              # Personalized learning recommendation system
+├── simulated_learner.py        # Simulated learner environment
+├── train_offline.py            # Offline training pipeline
+├── requirements.txt            # Python dependencies
+│
+├── qgen/                       # Question generation components
+│
+├── metrics/                    # Evaluation and performance metrics
+│
+└── README.md                   # Project documentation
+```
+
+---
+
+## ⚙️ Technologies Used
+
+* **Python**
+* **Reinforcement Learning**
+* **Deep Q-Network (DQN)**
+* **Machine Learning**
+* **Recommendation Systems**
+* **Natural Language Processing**
+* **AI-based Quiz Generation**
+* **NumPy**
+* **Scikit-learn**
+* Other Python libraries listed in `requirements.txt`
+
+---
+
+## 🔄 System Workflow
+
+```text
+                 ┌─────────────────────┐
+                 │     Learner Data    │
+                 └──────────┬──────────┘
+                            │
+                            ▼
+                 ┌─────────────────────┐
+                 │  Learner State      │
+                 │  & Performance      │
+                 └──────────┬──────────┘
+                            │
+                            ▼
+                 ┌─────────────────────┐
+                 │   DQN Agent         │
+                 │ Reinforcement       │
+                 │ Learning            │
+                 └──────────┬──────────┘
+                            │
+                            ▼
+                 ┌─────────────────────┐
+                 │ Personalized        │
+                 │ Recommendation      │
+                 └──────────┬──────────┘
+                            │
+                            ▼
+                 ┌─────────────────────┐
+                 │ Learning Activity   │
+                 │ / Quiz              │
+                 └──────────┬──────────┘
+                            │
+                            ▼
+                 ┌─────────────────────┐
+                 │ Learner Feedback    │
+                 │ & Performance       │
+                 └──────────┬──────────┘
+                            │
+                            └──────────────► Updated Learner State
+```
+
+---
+
+## 🧠 Reinforcement Learning Approach
+
+SkillPath AI models personalized learning as a **reinforcement learning problem**.
+
+The system considers:
+
+* **State:** Current learner knowledge and performance
+* **Action:** Selection of the next learning activity/topic
+* **Reward:** Improvement in learner performance
+* **Next State:** Updated learner knowledge after completing the activity
+
+The DQN agent learns a policy that attempts to select learning activities that maximize the learner's long-term improvement.
+
+---
+
+## 📋 Installation
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/deepikadharanikota/Skill-path-AI.git
+```
+
+### 2. Navigate to the project
+
+```bash
+cd Skill-path-AI
+```
+
+### 3. Create a virtual environment
+
+Windows:
+
+```bash
+python -m venv venv
+```
+
+Activate it:
+
+```bash
+venv\Scripts\activate
+```
+
+Linux/macOS:
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+### 4. Install dependencies
 
 ```bash
 pip install -r requirements.txt
-streamlit run main.py
 ```
 
-Then open the URL Streamlit prints (usually `http://localhost:8501`).
+---
 
-## Project layout
+## ▶️ Running the Project
 
-| File | Purpose |
-|---|---|
-| `main.py` | **Entry point.** The Streamlit app — resume upload, learning modules, quizzes, results, and the dashboard. Ties everything below together. |
-| `data.py` | Static content: skills database, topics, roles, module structure, curated video library (per topic/difficulty/module, watched in order), and the 15-question leveled quiz bank per topic (5 easy/5 medium/5 hard). |
-| `agent_utils.py` | Skill extraction from resume text, module-progress helpers, and topic-knowledge estimation for the dashboard. Direct Python port of `agentUtils.js`. |
-| `recommender.py` | Decision layer that asks the trained `DQNAgent` what to recommend next and turns its output into a friendly explanation. Replaces `apiUtils.js` — no external LLM call is required to run the app. |
-| `dqn_agent.py` | The DQN itself: `QNetwork` (manual forward pass + backprop + Adam), `ReplayBuffer`, `DQNAgent` (epsilon-greedy `act`, `remember`, `replay`, target-network sync, save/load). |
-| `environment.py` | Defines the MDP: state encoding (12-dim: 8 topic-mastery values + 3 recent scores + fatigue), action space (24 = 8 topics × 3 difficulties), and the reward function. |
-| `simulated_learner.py` | A simulated student used to pretrain the agent offline before it meets a real user. |
-| `train_offline.py` | Runs the full training loop against the simulator and saves `dqn_weights.pkl`. |
-| `dqn_weights.pkl` | Pretrained weights, loaded automatically by `main.py` on startup (falls back to an untrained agent if missing). |
-
-
-
-## Learning flow (videos + quiz)
-
-**Videos — one at a time, in order.** Each module (Introduction / Core
-Content / Final Review) has its own video list, watched strictly in
-sequence: `intro` has 1 video, `core` has **at least 2 detailed videos**
-(the "excluding introduction and conclusion" requirement). The next video only unlocks once the current one is
-marked "✅ I've watched this." The quiz button itself stays locked until
-every video in the module is done.
-
-**Quiz — 15 questions, timed, no skipping.** Every topic has a bank of
-**15 leveled questions — exactly 5 easy, 5 medium, 5 hard** — used for
-that topic's intro/core/summary quizzes (shuffled fresh each attempt).
-Questions are shown **one at a time**: you must select an answer and
-wait a **minimum of 40 seconds** before "Confirm Answer & Continue"
-unlocks, there's no back button and no way to jump ahead, and the top
-navigation is hidden for the duration so you can't leave mid-quiz.
-After the 15th question, you get a full review (your answer, the
-correct one, and an explanation for each question) before moving on to
-the optional coding challenge.
-
-This lives in `data.py` (`VIDEO_DB[topic][difficulty][module]`,
-`QUIZ_BANK[topic]`) and `main.py` (`render_learning()` for video gating,
-`render_quiz()` for the timed one-by-one flow). It only touches content
-and UI flow — the DQN, the environment/reward, and `agent.remember()` /
-`agent.replay()` are untouched; a module's aggregate quiz/code score
-(0–100%) still feeds the same reward function regardless of how many
-questions produced it.
-
-*Note on the 60-second timer:* it's enforced server-side against a real
-timestamp, so it can't be bypassed by clicking fast. The visual
-countdown is a self-contained JS clock (via Streamlit's built-in
-`components.html`, no extra package) that ticks independently in the
-browser; if you leave the tab idle rather than interacting, the
-"Confirm" button's enabled state only re-evaluates on the next
-Streamlit rerun (any click, including the "🔄 Check timer" button next
-to it) — a small, documented limitation of doing this without adding a
-JS-autorefresh dependency.
-
-## (Optional) Retraining the agent
+Run the main application:
 
 ```bash
-python train_offline.py --episodes 300
+python main.py
 ```
 
-This runs the DQN against `SimulatedLearner` and overwrites
-`dqn_weights.pkl`. `main.py` will pick up the new weights the next time
-it starts.
+---
 
-## Evaluating the agent (`evaluate.py`)
+## 🏋️ Training
 
-`train_offline.py`'s printout tells you the loss went down. It doesn't
-tell you whether the resulting policy is actually *good*. `evaluate.py`
-answers that by comparing the trained DQN against sane baselines on the
-same simulator, using matched random seeds so every policy faces an
-identical sequence of simulated learners (fair, paired comparison).
+To train the reinforcement learning model offline:
 
 ```bash
-# Evaluate the existing dqn_weights.pkl
+python train_offline.py
+```
+
+The trained model weights can be stored in:
+
+```text
+dqn_weights.pkl
+```
+
+---
+
+## 📊 Evaluation
+
+To evaluate the trained model:
+
+```bash
 python evaluate.py
-
-# Retrain from scratch with full logging (reward/loss/epsilon curves), then evaluate
-python evaluate.py --retrain --episodes 1000 --eval-episodes 200
 ```
 
-**Baselines compared:**
-| Policy | Description |
-|---|---|
-| `dqn_greedy` | The trained agent, greedy (`explore=False`) |
-| `random` | Uniform random action every step |
-| `round_robin_beginner` | Cycles through all 8 topics in order, always "beginner" — no adaptation at all |
-| `rule_based_weakest_topic` | Always recommends the topic with the lowest current mastery, difficulty matched to mastery level via simple thresholds |
+The evaluation components in the `metrics/` directory can be used to analyze system performance.
 
-**Metrics reported, per policy:** average episode reward (± std), average
-simulated quiz/code score, average number of distinct topics recommended
-per episode, and a **95% bootstrap confidence interval on the paired
-reward difference** against `dqn_greedy` (so you can tell a real gap from
-noise, not just eyeball two averages).
+---
 
-**Outputs:** `metrics/training_curves.png` (reward/loss/epsilon/quiz-score
-over training, only with `--retrain`), `metrics/policy_comparison.png`,
-and `metrics/summary.json`.
+## 📝 Quiz Generation
 
-### Current honest result
+Quiz/question generation functionality can be executed through:
 
-Running `evaluate.py` against the shipped `dqn_weights.pkl` (and again
-after retraining for 1000 episodes — loss fully converges to ~0.0001 by
-episode 1000, so this isn't an undertraining issue):
-
-```
-dqn_greedy                | reward=+5.30 ± 0.26 | quiz=83.4% | topics/ep=4.5/8
-random                    | reward=+3.44 ± 0.47 | quiz=43.4% | topics/ep=6.3/8
-round_robin_beginner      | reward=+5.48 ± 0.14 | quiz=85.2% | topics/ep=8.0/8
-rule_based_weakest_topic  | reward=+5.62 ± 0.14 | quiz=86.0% | topics/ep=5.6/8
-
-dqn_greedy vs round_robin_beginner      | diff=-0.18  95% CI=[-0.22, -0.15] -> DQN worse
-dqn_greedy vs rule_based_weakest_topic  | diff=-0.32  95% CI=[-0.36, -0.29] -> DQN worse
+```bash
+python generate_quiz_bank.py
 ```
 
-**The DQN reliably beats random, but loses to both simple baselines —
-and the gap is statistically significant (CI excludes zero), not noise.**
-Likely explanation: the reward function's `topic_alignment` term is
-`1 - mastery(topic)`, which makes "recommend whatever topic has the
-lowest mastery" very close to reward-optimal by construction — exactly
-what `rule_based_weakest_topic` does directly. A function approximator
-trained via epsilon-greedy TD-learning has to *discover* that rule
-through trial and error across a 24-action space, and 1000 episodes of a
-2-hidden-layer MLP hasn't fully closed that gap. This is a genuine,
-reproducible finding (not a bug) — it means either the reward shaping
-makes this task close to a contextual-bandit problem a simpler method
-would solve more directly, or the DQN needs more training / tuning
-(larger buffer warm-up, slower epsilon decay, or a larger network) to
-match a rule it should in principle be able to exceed. Re-run
-`evaluate.py` after any changes to see whether the gap closes.
+The `qgen/` directory contains the components responsible for question generation.
 
-## Why this is a genuine RL system, not a rebrand
+---
 
-- **Function approximation**: Q-values come from a trained neural net, not a lookup table or if/else ladder.
-- **Backpropagation**: `QNetwork.train_on_batch` computes real gradients layer by layer and updates weights with Adam.
-- **Experience replay**: transitions are stored and sampled in random mini-batches, breaking correlation between consecutive updates.
-- **Target network**: a separate slow-moving copy of the weights is used to compute bootstrapped targets, updated every `target_update_every` steps — this is what makes DQN stable (Mnih et al., 2015).
-- **Epsilon-greedy exploration with decay**: the agent explores early and exploits more as `epsilon` decays.
-- **Bellman update**: `target = reward + gamma * max_a' Q_target(s', a')`, the actual DQN objective, not a heuristic.
-- **Live training**: every time a learner finishes a quiz, `main.py` calls `agent.remember(...)` and `agent.replay()` — a real gradient step happens on the spot, in the same process serving the UI.
+## 🎯 Project Goals
+
+The main goal of SkillPath AI is to build an intelligent learning system that:
+
+1. Understands the learner's current skill level.
+2. Identifies areas that need improvement.
+3. Selects appropriate learning activities.
+4. Uses learner feedback to improve recommendations.
+5. Continuously adapts the learning path.
+6. Evaluates the effectiveness of personalized recommendations.
+
+---
+
+## 🔮 Future Enhancements
+
+* 🌐 Web-based learning dashboard
+* 👤 User authentication and learner profiles
+* 📈 Real-time progress visualization
+* 🤖 Improved AI-generated learning content
+* 🎯 More advanced learner modeling
+* ☁️ Cloud deployment
+* 📱 Mobile-friendly interface
+* 🔍 Explainable recommendations
+* 🧠 Integration with additional reinforcement learning algorithms
+
+---
+
+## 👩‍💻 Author
+
+**Naga Deepika**
+
+GitHub:
+https://github.com/deepikadharanikota
+
+---
+
+## 📄 License
+
+This project is intended for educational and research purposes. A suitable open-source license can be added as the project evolves.
+
+
