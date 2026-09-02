@@ -7,8 +7,6 @@ JavaScript frontend (`my-app/`) has been removed and replaced with a
 [Streamlit](https://streamlit.io) app that runs the same core RL logic
 directly, in-process.
 
-There is no `npm`, no `node_modules`, no `.js`/`.jsx` file anywhere in
-this project anymore.
 
 ## Run it
 
