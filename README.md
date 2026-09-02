@@ -33,26 +33,7 @@ Then open the URL Streamlit prints (usually `http://localhost:8501`).
 | `train_offline.py` | Runs the full training loop against the simulator and saves `dqn_weights.pkl`. |
 | `dqn_weights.pkl` | Pretrained weights, loaded automatically by `main.py` on startup (falls back to an untrained agent if missing). |
 
-## What changed from the old React version
 
-- **Removed**: `my-app/` (the entire React + Node project — `package.json`,
-  `node_modules`, every `.js`/`.jsx` file).
-- **Removed**: `api_server.py` (the Flask HTTP wrapper). It existed only
-  so the browser-based React app could reach the Python RL core over
-  HTTP. Since there's no browser code left to call it, `main.py` now
-  imports `DQNAgent` and `environment` directly and calls them in-process
-  — same decision logic, one less moving part.
-- **Removed**: the client-side `fetch("https://api.anthropic.com/...")`
-  calls in the old `apiUtils.js` / `QuizScreen.jsx`. Those calls shipped
-  no API key and would always fail in a browser, silently falling back to
-  hardcoded logic — so in practice that fallback logic *was* the real
-  behavior. `recommender.py` makes that real behavior explicit and
-  deterministic, and lets the actual trained DQN (not string-matching a
-  hoped-for LLM response) make every topic/difficulty decision.
-- **Kept, unchanged**: `dqn_agent.py`, `environment.py`,
-  `simulated_learner.py`, `train_offline.py` — this was already a
-  genuine, from-scratch RL implementation in Python and needed no
-  changes.
 
 ## Learning flow (videos + quiz)
 
