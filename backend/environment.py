@@ -28,7 +28,7 @@ import numpy as np
 
 TOPICS = [
     "Python", "Machine Learning", "Deep Learning", "Statistics",
-    "NLP", "Computer Vision", "MLOps", "Data Engineering",
+    "NLP", "Computer Vision", "MLOps", "Data Engineering", "DevOps"
 ]
 
 DIFFICULTIES = ["beginner", "intermediate", "advanced"]

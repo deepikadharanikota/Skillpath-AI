@@ -56,7 +56,8 @@ TOPICS = ['Python',
  'NLP',
  'Computer Vision',
  'MLOps',
- 'Data Engineering']
+ 'Data Engineering',
+ 'DevOps']
 
 DIFFICULTIES = ['beginner', 'intermediate', 'advanced']
 
@@ -66,7 +67,21 @@ ROLES = ['ML Engineer',
  'AI Researcher',
  'MLOps Engineer',
  'Computer Vision Engineer',
- 'NLP Engineer']
+ 'NLP Engineer',
+ 'Python Developer',
+ 'DevOps Engineer']
+
+ROLE_TO_TOPIC = {
+    'ML Engineer': 'Machine Learning',
+    'Data Scientist': 'Machine Learning',
+    'Data Engineer': 'Data Engineering',
+    'AI Researcher': 'Deep Learning',
+    'MLOps Engineer': 'MLOps',
+    'Computer Vision Engineer': 'Computer Vision',
+    'NLP Engineer': 'NLP',
+    'Python Developer': 'Python',
+    'DevOps Engineer': 'DevOps'
+}
 
 ROLE_SKILLS = {'ML Engineer': ['Python',
                  'Machine Learning',
@@ -78,6 +93,18 @@ ROLE_SKILLS = {'ML Engineer': ['Python',
                  'Docker',
                  'Git',
                  'Statistics'],
+ 'Python Developer': ['Python',
+                      'Git',
+                      'Docker',
+                      'SQL',
+                      'FastAPI',
+                      'Pandas'],
+ 'DevOps Engineer': ['Docker',
+                     'Kubernetes',
+                     'AWS',
+                     'Git',
+                     'Python',
+                     'SQL'],
  'Data Scientist': ['Python',
                     'Statistics',
                     'Machine Learning',
@@ -179,9 +206,12 @@ CODE_PROMPTS = {'Machine Learning': {'intro': "Write a simple Python example sho
                                'first 5 rows along with column types.',
                       'core': 'Write a PySpark script that loads a DataFrame, filters rows, and '
                               'computes an aggregation.',
-                      'summary': 'Write a Python function that implements a simple ETL pipeline: '
-                                 'extract from CSV, transform (clean nulls, rename columns), load '
-                                 'into a new CSV.'}}
+                       'summary': 'Write a Python function that implements a simple ETL pipeline: '
+                                  'extract from CSV, transform (clean nulls, rename columns), load '
+                                  'into a new CSV.'},
+  'DevOps': {'intro': 'Write a Dockerfile that sets up a basic Nginx web server.',
+             'core': 'Write a simple Kubernetes deployment YAML file for a containerized app.',
+             'summary': 'Write a GitHub Actions workflow to build and push a Docker image to Docker Hub.'}}
 
 VIDEO_DB = {'Python': {'beginner': {'intro': [{'title': 'Python Tutorial for Beginners – Full Course',
                                     'channel': 'Programming with Mosh',
@@ -798,7 +828,16 @@ VIDEO_DB = {'Python': {'beginner': {'intro': [{'title': 'Python Tutorial for Beg
                                                 'duration': '20:00:00',
                                                 'thumb': 'https://i.ytimg.com/vi/-zpVha7bw5A/hqdefault.jpg',
                                                 'url': 'https://www.youtube.com/watch?v=-zpVha7bw5A',
-                                                'views': '340K'}]}}}
+                                                'views': '340K'}]}},
+ 'DevOps': {'beginner': {'intro': [{'title': 'DevOps Engineering Course for Beginners', 'channel': 'freeCodeCamp.org', 'duration': '2:15:00', 'thumb': 'https://i.ytimg.com/vi/hQcFE0RD0cQ/hqdefault.jpg', 'url': 'https://www.youtube.com/watch?v=hQcFE0RD0cQ', 'views': '3.2M'}],
+                         'core': [{'title': 'Docker Tutorial for Beginners', 'channel': 'TechWorld with Nana', 'duration': '3:08:00', 'thumb': 'https://i.ytimg.com/vi/3c-iBn73dDE/hqdefault.jpg', 'url': 'https://www.youtube.com/watch?v=3c-iBn73dDE', 'views': '4.5M'}],
+                         'summary': [{'title': 'Kubernetes Crash Course', 'channel': 'TechWorld with Nana', 'duration': '1:30:00', 'thumb': 'https://i.ytimg.com/vi/s_o8dwzRlu4/hqdefault.jpg', 'url': 'https://www.youtube.com/watch?v=s_o8dwzRlu4', 'views': '2.1M'}]},
+            'intermediate': {'intro': [{'title': 'CI/CD Pipelines Explained', 'channel': 'TechWorld with Nana', 'duration': '1:00:00', 'thumb': 'https://i.ytimg.com/vi/scziwA6u-xI/hqdefault.jpg', 'url': 'https://www.youtube.com/watch?v=scziwA6u-xI', 'views': '1M'}],
+                             'core': [{'title': 'AWS Certified Solutions Architect', 'channel': 'freeCodeCamp.org', 'duration': '10:00:00', 'thumb': 'https://i.ytimg.com/vi/Ia-UEYYRCEI/hqdefault.jpg', 'url': 'https://www.youtube.com/watch?v=Ia-UEYYRCEI', 'views': '2.5M'}],
+                             'summary': [{'title': 'Terraform Course', 'channel': 'freeCodeCamp.org', 'duration': '2:30:00', 'thumb': 'https://i.ytimg.com/vi/l5k1ai_GBDE/hqdefault.jpg', 'url': 'https://www.youtube.com/watch?v=l5k1ai_GBDE', 'views': '800K'}]},
+            'advanced': {'intro': [{'title': 'Advanced Kubernetes', 'channel': 'TechWorld with Nana', 'duration': '1:45:00', 'thumb': 'https://i.ytimg.com/vi/31wbQevA150/hqdefault.jpg', 'url': 'https://www.youtube.com/watch?v=31wbQevA150', 'views': '500K'}],
+                         'core': [{'title': 'Prometheus & Grafana Tutorial', 'channel': 'TechWorld with Nana', 'duration': '1:50:00', 'thumb': 'https://i.ytimg.com/vi/h4Sl21AKiDg/hqdefault.jpg', 'url': 'https://www.youtube.com/watch?v=h4Sl21AKiDg', 'views': '750K'}],
+                         'summary': [{'title': 'Site Reliability Engineering', 'channel': 'Google Cloud Tech', 'duration': '0:45:00', 'thumb': 'https://i.ytimg.com/vi/uTEL8Ff1Zvk/hqdefault.jpg', 'url': 'https://www.youtube.com/watch?v=uTEL8Ff1Zvk', 'views': '200K'}]}}}
 
 QUIZ_BANK = {
     "Python": [
@@ -936,5 +975,16 @@ QUIZ_BANK = {
         {"level": 'hard', "q": 'What is the difference between schema-on-read and schema-on-write?', "opts": ['They are identical concepts', 'Schema-on-read applies structure at query time (typical of data lakes); schema-on-write applies it at ingestion (typical of warehouses)', 'Schema-on-write is always slower', 'Schema-on-read cannot use SQL'], "ans": 1, "explanation": 'Schema-on-read defers structure until data is queried; schema-on-write enforces structure before data is stored.'},
         {"level": 'hard', "q": "What is a 'data lakehouse'?", "opts": ['A data lake with no schema at all', 'An architecture combining data lake flexibility with data warehouse-like management and querying', 'A physical building storing servers', 'A deprecated database format'], "ans": 1, "explanation": 'Lakehouses aim to merge the low-cost flexible storage of lakes with the reliability/querying of warehouses.'},
         {"level": 'hard', "q": 'Why is idempotency important in data pipelines?', "opts": ['It makes pipelines run faster', "It ensures re-running a pipeline step doesn't produce duplicate or inconsistent results", 'It reduces storage costs automatically', 'It removes the need for monitoring'], "ans": 1, "explanation": 'Idempotent pipeline steps can safely be retried after failures without corrupting or duplicating data.'},
+    ],
+    "DevOps": [
+        {"level": 'easy', "q": "What is Docker?", "opts": ["A cloud provider", "A containerization platform", "A version control system", "A programming language"], "ans": 1, "explanation": "Docker allows packaging applications in isolated containers."},
+        {"level": 'easy', "q": "What is CI/CD?", "opts": ["Continuous Integration / Continuous Deployment", "Cloud Infrastructure / Cloud Deployment", "Code Isolation / Code Delivery", "Control Internet / Control Domain"], "ans": 0, "explanation": "CI/CD automates building, testing, and deploying code."},
+        {"level": 'easy', "q": "What does Git do?", "opts": ["Monitors servers", "Manages databases", "Provides version control", "Builds containers"], "ans": 2, "explanation": "Git tracks changes to code over time."},
+        {"level": 'medium', "q": "What is Kubernetes?", "opts": ["A container orchestration tool", "A cloud database", "A type of firewall", "A load testing script"], "ans": 0, "explanation": "Kubernetes automatically manages, scales, and deploys containers."},
+        {"level": 'medium', "q": "What is Infrastructure as Code (IaC)?", "opts": ["Writing backend servers", "Managing infrastructure using configuration files", "Deploying code manually", "Encrypting database backups"], "ans": 1, "explanation": "IaC uses tools like Terraform or Ansible to define infrastructure in code."},
+        {"level": 'medium', "q": "Which tool is commonly used for IaC?", "opts": ["Docker", "Terraform", "Git", "Prometheus"], "ans": 1, "explanation": "Terraform is a widely used IaC tool."},
+        {"level": 'hard', "q": "What does a reverse proxy do?", "opts": ["Prevents database access", "Directs client requests to the appropriate backend server", "Encrypts all passwords", "Backs up data daily"], "ans": 1, "explanation": "Reverse proxies sit in front of web servers and forward client requests to them."},
+        {"level": 'hard', "q": "What is a Service Mesh?", "opts": ["A database index", "A dedicated infrastructure layer for service-to-service communication", "A load balancer", "A virtual private network"], "ans": 1, "explanation": "A service mesh handles communication, security, and observability between microservices."},
+        {"level": 'hard', "q": "What is Prometheus primarily used for?", "opts": ["Compiling code", "Metrics collection and alerting", "Container orchestration", "Database hosting"], "ans": 1, "explanation": "Prometheus is a monitoring system that collects and stores metrics as time series data."}
     ],
 }

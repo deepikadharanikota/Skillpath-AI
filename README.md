@@ -252,17 +252,4 @@ The main goal of SkillPath AI is to build an intelligent learning system that:
 
 ---
 
-## 👩‍💻 Author
-
-**Naga Deepika**
-
-GitHub:
-https://github.com/deepikadharanikota
-
----
-
-## 📄 License
-
-This project is intended for educational and research purposes. A suitable open-source license can be added as the project evolves.
-
 

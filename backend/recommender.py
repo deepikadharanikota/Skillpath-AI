@@ -57,15 +57,24 @@ def _pick_strategy(topic, extracted_skills, role_skills):
 def get_initial_recommendation(agent, target_role, extracted_skills, role_skills):
     gaps = [s for s in role_skills if s not in extracted_skills]
 
-    # Seed topic mastery purely from resume-derived skill overlap (no quiz
-    # history exists yet).
+    # Seed topic mastery purely from resume-derived skill overlap
     topic_mastery = {
         t: compute_topic_knowledge(t, extracted_skills, {}, [])
         for t in TOPICS
     }
     state = build_state(topic_mastery, [], 0.0)
     action, q_values = agent.act(state, explore=False)
-    topic, difficulty = decode_action(action)
+    _, difficulty = decode_action(action) # Keep DQN's difficulty choice, but we will override topic
+
+    # Force the initial topic to align with the target role and skill gaps
+    from data import ROLE_TO_TOPIC
+    
+    # 1. Fallback to the configured primary topic for this role
+    topic = ROLE_TO_TOPIC.get(target_role)
+    
+    # 2. Or, if the role isn't mapped, fallback to a sensible default
+    if not topic:
+        topic = "Machine Learning"
 
     strategy = _pick_strategy(topic, extracted_skills, role_skills)
     explanation = (
