@@ -1,0 +1,150 @@
+{
+  "timestamp": "2026-09-20 16:52:26",
+  "python_version": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "win32",
+  "experiment_configuration": {
+    "state_dim": 13,
+    "action_dim": 27,
+    "hidden_dim": 64,
+    "learning_rate": 0.001,
+    "gamma": 0.95,
+    "epsilon_start": 1.0,
+    "epsilon_min": 0.05,
+    "epsilon_decay": 0.995,
+    "replay_buffer_size": 10000,
+    "batch_size": 32,
+    "target_update_frequency": 25,
+    "max_steps_per_episode": 12,
+    "training_episodes": 300,
+    "evaluation_episodes_per_seed": 200,
+    "seeds": [
+      42,
+      101,
+      202,
+      303,
+      404
+    ],
+    "total_evaluation_episodes_per_algo": 1000
+  },
+  "statistical_tests": {
+    "DQN vs Double DQN": {
+      "t_statistic": -6.198886618843258,
+      "p_value": 6.920999397399452e-10,
+      "statistically_significant_p05": true,
+      "cohens_d": 0.2772226372909471,
+      "mean_diff": 0.09387971527657601,
+      "sample_size_each": 1000
+    },
+    "DQN vs Dueling DQN": {
+      "t_statistic": -6.397005792944057,
+      "p_value": 1.9912853036376576e-10,
+      "statistically_significant_p05": true,
+      "cohens_d": 0.2860827961096571,
+      "mean_diff": 0.09377450068320581,
+      "sample_size_each": 1000
+    },
+    "Double DQN vs Dueling DQN": {
+      "t_statistic": 0.00786438966043137,
+      "p_value": 0.9937259798414055,
+      "statistically_significant_p05": false,
+      "cohens_d": -0.00035170619764542067,
+      "mean_diff": -0.00010521459337020644,
+      "sample_size_each": 1000
+    }
+  },
+  "summary_statistics": {
+    "DQN": {
+      "mean_reward": 5.197232252888862,
+      "std_reward": 0.36400320353705623,
+      "ci_95_reward": [
+        5.1746441485208186,
+        5.219820357256906
+      ],
+      "cumulative_reward": 5197.232252888863,
+      "max_reward": 5.822208205619239,
+      "min_reward": 2.906986229298863,
+      "training_loss": 0.011408500374118145,
+      "convergence_episode": 99,
+      "mean_episode_length": 12.0,
+      "std_episode_length": 0.0,
+      "success_rate": 97.7,
+      "skill_gap_reduction": 0.00028099386268842574,
+      "std_gap_reduction": 0.055181979608046494,
+      "skill_gap_reduction_pct": -0.17603661995940517,
+      "quiz_improvement": -11.632859999381111,
+      "std_quiz_imp": 31.72778254198826,
+      "avg_quiz_score": 80.35164299746597,
+      "std_quiz_score": 7.326487226852629,
+      "course_completion_rate": 0.0,
+      "video_completion_rate": 100.0,
+      "learning_progress_improvement": 0.0007842635652569506,
+      "target_role_skill_coverage": 0.0,
+      "recommendation_success_rate": 90.91666666666666,
+      "steps_to_skill_goal": 12.0,
+      "average_q_value": 2.6056705144138648,
+      "std_q_value": 1.2919589432330267
+    },
+    "Double DQN": {
+      "mean_reward": 5.291111968165438,
+      "std_reward": 0.3108560699872956,
+      "ci_95_reward": [
+        5.2718218924625795,
+        5.310402043868297
+      ],
+      "cumulative_reward": 5291.111968165438,
+      "max_reward": 5.855815241860525,
+      "min_reward": 3.808860371471893,
+      "training_loss": 0.010304599647856048,
+      "convergence_episode": 110,
+      "mean_episode_length": 12.0,
+      "std_episode_length": 0.0,
+      "success_rate": 99.6,
+      "skill_gap_reduction": 0.00028099386268842574,
+      "std_gap_reduction": 0.055181979608046494,
+      "skill_gap_reduction_pct": -0.17603661995940517,
+      "quiz_improvement": -7.572055371353334,
+      "std_quiz_imp": 25.326138735538816,
+      "avg_quiz_score": 82.07158491610191,
+      "std_quiz_score": 5.762138846817074,
+      "course_completion_rate": 0.0,
+      "video_completion_rate": 100.0,
+      "learning_progress_improvement": 0.0007842635652569506,
+      "target_role_skill_coverage": 0.0,
+      "recommendation_success_rate": 93.21666666666665,
+      "steps_to_skill_goal": 12.0,
+      "average_q_value": 2.5371012538935576,
+      "std_q_value": 1.2449265486326435
+    },
+    "Dueling DQN": {
+      "mean_reward": 5.291006753572068,
+      "std_reward": 0.28666477324562967,
+      "ci_95_reward": [
+        5.273217861183777,
+        5.308795645960359
+      ],
+      "cumulative_reward": 5291.006753572068,
+      "max_reward": 5.846580353121278,
+      "min_reward": 3.5283346914752984,
+      "training_loss": 0.002321041787687976,
+      "convergence_episode": 87,
+      "mean_episode_length": 12.0,
+      "std_episode_length": 0.0,
+      "success_rate": 99.6,
+      "skill_gap_reduction": 0.00028099386268842574,
+      "std_gap_reduction": 0.055181979608046494,
+      "skill_gap_reduction_pct": -0.17603661995940517,
+      "quiz_improvement": -5.0217288660548105,
+      "std_quiz_imp": 24.059998198405985,
+      "avg_quiz_score": 82.23331768122776,
+      "std_quiz_score": 5.395427564317693,
+      "course_completion_rate": 0.0,
+      "video_completion_rate": 100.0,
+      "learning_progress_improvement": 0.0007842635652569506,
+      "target_role_skill_coverage": 0.0,
+      "recommendation_success_rate": 93.54166666666667,
+      "steps_to_skill_goal": 12.0,
+      "average_q_value": 2.5250930102284137,
+      "std_q_value": 1.2208853041606462
+    }
+  }
+}

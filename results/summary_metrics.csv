@@ -1,0 +1,4 @@
+Algorithm,Mean Reward,Reward Std,Cumulative Reward,Max Reward,Min Reward,Training Loss,Convergence Episode,Average Episode Length,Episode Length Std,Success Rate (%),Skill Gap Reduction,Skill Gap Reduction %,Quiz Improvement,Average Quiz Score,Course Completion Rate,Video Completion Rate,Learning Progress Improvement,Target Role Skill Coverage,Recommendation Success Rate,Steps to Skill Goal,Average Q-value,Q-value Std
+DQN,5.1972,0.3640,5197.23,5.8222,2.9070,0.01141,99,12.00,0.00,97.70%,0.0003,-0.18%,-11.63,80.35%,0.00%,100.00%,0.0008,0.00%,90.92%,12.00,2.6057,1.2920
+Double DQN,5.2911,0.3109,5291.11,5.8558,3.8089,0.01030,110,12.00,0.00,99.60%,0.0003,-0.18%,-7.57,82.07%,0.00%,100.00%,0.0008,0.00%,93.22%,12.00,2.5371,1.2449
+Dueling DQN,5.2910,0.2867,5291.01,5.8466,3.5283,0.00232,87,12.00,0.00,99.60%,0.0003,-0.18%,-5.02,82.23%,0.00%,100.00%,0.0008,0.00%,93.54%,12.00,2.5251,1.2209
